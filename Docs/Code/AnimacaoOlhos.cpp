@@ -1,6 +1,6 @@
 #include "AnimacaoOlhos.h"
 
-AnimacaoOlhos::AnimacaoOlhos(Adafruit_SSD1306 &display) : _display(display) {
+AnimacaoOlhos::AnimacaoOlhos(Adafruit_ST7789 &display) : _display(display) {
     CentroOlhoX1 = _display.width() / 1.3;
     CentroOlhoY1 = _display.height() / 2;
     CentroOlhoX2 = _display.width() / 4;
