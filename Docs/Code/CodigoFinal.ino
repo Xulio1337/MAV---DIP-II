@@ -7,14 +7,16 @@ Código em desenvolvimento....
  |___________________________________________|
 
 Incluir Bibliotecas. Adafruit é a do OLED*/
-#include <Wire.h>
+#include <SPI.h>
 #include <Adafruit_GFX.h>
-#include <Adafruit_SSD1306.h>
+#include <Adafruit_ST7789.h>
 #include "AnimacaoOlhos.h"  // Incluindo a biblioteca de animação dos olhos
 
 // Definindo o pino do display OLED
-#define SCREEN_WIDTH 128
-#define SCREEN_HEIGHT 64
+// Pinos SPI
+#define TFT_CS   10
+#define TFT_DC    9
+#define TFT_RST   8  // ou -1 se não usar pino RESET
 #define OLED_RESET -1
 #define OLED_ADDR 0x3C
 // Endereço I2C do display OLED SSD1306
@@ -33,7 +35,7 @@ int umidade;
 int umidadeMinima = 40; // Umidade mínima ideal (valor inicial para suculentas)
 int umidadeMaxima = 60; // Umidade máxima ideal (valor inicial para suculentas)
 
-Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
+Adafruit_ST7789 display = Adafruit_ST7789(TFT_CS, TFT_DC, TFT_RST);
 AnimacaoOlhos animacao(display);  // Instanciando o objeto de animação dos olhos
 
 // Variáveis para botões
@@ -49,20 +51,19 @@ unsigned long tempoAnterior = 0;
 const unsigned long intervaloAnimacao = 500; // Intervalo para animação (500ms)
 
 void setup() {
-  if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
-    while (true); // Loop infinito caso o display falhe
-  }
+  // Inicializa o display ST7789 com resolução 240x320
+  display.init(240, 320);
+  display.setRotation(1);             // Ajuste a rotação conforme necessário (0 a 3)
+  display.fillScreen(ST77XX_BLACK);   // Limpa a tela com fundo preto
 
-  // Usei 3 botões pois tive dificuldade com 2 botões, na hora de trocar o modo ele bugava.
+  // Inicializa os botões
   pinMode(BOTAO1, INPUT_PULLUP); // Mostra a % do sensor
   pinMode(BOTAO2, INPUT_PULLUP); // Mostra o Modo Atual
   pinMode(BOTAO3, INPUT_PULLUP); // Troca o Modo da planta.
 
-  // Inicializando os olhos
-  display.clearDisplay(); // Limpa o display
-  display.setTextSize(1); // Reduzindo o tamanho da fonte
-  display.setTextColor(WHITE); // White aqui significa que o LED vai acender
-  display.display(); // Exibe o display
+  // Inicializa a animação dos olhos
+  display.setTextSize(1);
+  display.setTextColor(ST77XX_WHITE); // No ST7789, use ST77XX_WHITE (não apenas WHITE)
   animacao.expressaoBase(); // Exibe a expressão base
 }
 
