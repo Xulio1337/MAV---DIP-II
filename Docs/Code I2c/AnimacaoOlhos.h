@@ -2,11 +2,11 @@
 #define ANIMACAOOLHOS_H
 
 #include <Adafruit_GFX.h>
-#include <Adafruit_ST7789.h>
+#include <Adafruit_SSD1306.h>
 
 class AnimacaoOlhos {
 public:
-    AnimacaoOlhos(Adafruit_ST7789 &display);
+    AnimacaoOlhos(Adafruit_SSD1306 &display);
 
     void desenharOlhos();
     void MoverPupilasParaAngulo(int angulo);
@@ -19,7 +19,7 @@ public:
     void expressaoFeliz();
 
 private:
-    Adafruit_ST7789 &_display;
+    Adafruit_SSD1306 &_display;
 
     int TamanhoPupila = 10;  // Tamanho das pupilas
     int RaioOcular = 25;  // Raio do globo ocular
