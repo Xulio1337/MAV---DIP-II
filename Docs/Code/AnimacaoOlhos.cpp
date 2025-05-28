@@ -13,7 +13,7 @@ AnimacaoOlhos::AnimacaoOlhos(Adafruit_ST7789 &display) : _display(display) {
 }
 
 void AnimacaoOlhos::desenharOlhos() {
-    _display.fillScreen(ST77XX_BLACK);
+    _display.fillScreen(ST77XX_BLACK); //~~~~
     _display.fillCircle(CentroOlhoX1, CentroOlhoY1, RaioOcular, ST77XX_WHITE);
     _display.fillCircle(CentroOlhoX2, CentroOlhoY2, RaioOcular, ST77XX_WHITE);
     _display.fillCircle(PupilaX1, PupilaY1, TamanhoPupila, ST77XX_BLACK);
@@ -46,7 +46,7 @@ void AnimacaoOlhos::MoverPupilasParaAngulo(int angulo) {
     RestringirPosicaoPupila(CentroOlhoX1, CentroOlhoY1, PupilaX1, PupilaY1);
     RestringirPosicaoPupila(CentroOlhoX2, CentroOlhoY2, PupilaX2, PupilaY2);
 
-    _display.fillScreen(ST77XX_BLACK);
+    _display.fillScreen(ST77XX_BLACK);~//~~~~
     _display.fillCircle(CentroOlhoX1, CentroOlhoY1, RaioOcular, ST77XX_WHITE);
     _display.fillCircle(CentroOlhoX2, CentroOlhoY2, RaioOcular, ST77XX_WHITE);
     _display.fillCircle(PupilaX1, PupilaY1, TamanhoPupila, ST77XX_BLACK);
@@ -66,24 +66,24 @@ void AnimacaoOlhos::piscar() {
         _display.drawLine(0, i - 1, _display.width() - 1, i - 1, ST77XX_BLACK);
         _display.drawLine(0, _display.height() - i, _display.width() - 1, _display.height() - i, ST77XX_BLACK);
     }
-    delay(5);
+    delay(5); //trocar logica por milis!
 
     for (int i = 1; i <= 32; i++) {
         if (i >= 25 && i <= 39) continue;
         _display.drawLine(0, i - 1, _display.width() - 1, i - 1, ST77XX_BLACK);
         _display.drawLine(0, _display.height() - i, _display.width() - 1, _display.height() - i, ST77XX_BLACK);
     }
-    delay(5);
+    delay(5);//trocar logica por milis!
 
     for (int i = 1; i <= 32; i++) {
         if (i >= 32 && i <= 32) continue;
         _display.drawLine(0, i - 1, _display.width() - 1, i - 1, ST77XX_BLACK);
         _display.drawLine(0, _display.height() - i, _display.width() - 1, _display.height() - i, ST77XX_BLACK);
     }
-    delay(5);
+    delay(5);//trocar logica por milis!
 
-    _display.fillScreen(ST77XX_BLACK);
-    delay(5);
+    _display.fillScreen(ST77XX_BLACK); //~~~~
+    delay(5); //trocar logica por milis!
 }
 
 void AnimacaoOlhos::expressaoCansado() {
@@ -130,7 +130,7 @@ void AnimacaoOlhos::expressaoBase() {
     PupilaX2 = CentroOlhoX2;
     PupilaY2 = CentroOlhoY2;
 
-    _display.fillScreen(ST77XX_BLACK);
+    _display.fillScreen(ST77XX_BLACK); //~~~~
     _display.fillCircle(CentroOlhoX1, CentroOlhoY1, RaioOcular, ST77XX_WHITE);
     _display.fillCircle(CentroOlhoX2, CentroOlhoY2, RaioOcular, ST77XX_WHITE);
     _display.fillCircle(PupilaX1, PupilaY1, TamanhoPupila, ST77XX_BLACK);
