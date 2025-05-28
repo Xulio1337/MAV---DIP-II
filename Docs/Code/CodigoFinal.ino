@@ -15,7 +15,7 @@ Código em desenvolvimento....
 // Pinos SPI para o display ST7789
 #define TFT_CS   10
 #define TFT_DC    9
-#define TFT_RST  -1  // ou use um pino real se estiver conectado
+#define TFT_RST  -1 
 
 #define SUCULENTA 0
 #define CACTOS 1
