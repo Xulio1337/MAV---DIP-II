@@ -5,6 +5,15 @@ Código em desenvolvimento....
  |                 iNovaX                    |
  |André_Monção - Julio_Oscar - Rafael_Xavier |
  |___________________________________________|
+
+ ----------------------------------------------
+  ___________________________________________
+ |               !!!AJUSTES!!!               |
+ | Retirar os fillscreen e criar uma nova    |
+ | logica. Depois rever as outras telas!     |
+ |___________________________________________|
+ 
+
 */
 
 #include <SPI.h>
@@ -42,7 +51,7 @@ const unsigned long intervaloAnimacao = 500;
 void setup() {
   display.init(240, 320);
   display.setRotation(1);
-  display.fillScreen(ST77XX_BLACK);
+  display.fillScreen(ST77XX_BLACK); //~~
 
   pinMode(BOTAO1, INPUT_PULLUP);
   pinMode(BOTAO2, INPUT_PULLUP);
@@ -81,7 +90,7 @@ void loop() {
 
   switch (etapa) {
     case 0:
-      display.fillScreen(ST77XX_BLACK);
+      display.fillScreen(ST77XX_BLACK); //~~
       animacao.expressaoBase();
       if (tempoAtual - tempoAnterior >= 2000) {
         tempoAnterior = tempoAtual;
@@ -141,7 +150,7 @@ void exibirFaixaUmidade() {
   int leitura = analogRead(PINO_POTENCIOMETRO);
   int porcentagem = map(leitura, 0, 1023, 0, 100);
 
-  display.fillScreen(ST77XX_BLACK);
+  display.fillScreen(ST77XX_BLACK);//~~
   display.setTextSize(1);
   display.setCursor(10, 5);
   display.print("Umidade Atual: ");
@@ -165,7 +174,7 @@ void exibirFaixaUmidade() {
 }
 
 void exibirModoAtual() {
-  display.fillScreen(ST77XX_BLACK);
+  display.fillScreen(ST77XX_BLACK);//~~
   display.setCursor(30, 25);
   if (modoAtual == SUCULENTA) {
     display.print("Suculenta");
@@ -180,7 +189,7 @@ void selecionarModo() {
   selecionandoModo = true;
   resetarTempoTela();
   while (millis() - tempoTela < 3000) {
-    display.fillScreen(ST77XX_BLACK);
+    display.fillScreen(ST77XX_BLACK);//~~
     display.setCursor(30, 25);
     if (modoAtual == SUCULENTA) {
       display.print("Suculenta");
@@ -194,7 +203,7 @@ void selecionarModo() {
       alternarModo();
       resetarTempoTela();
       delay(50);
-      display.fillScreen(ST77XX_BLACK);
+      display.fillScreen(ST77XX_BLACK);//~~
       delay(50);
     }
     if (digitalRead(BOTAO2) == LOW) {
@@ -204,7 +213,7 @@ void selecionarModo() {
   }
   confirmarModo();
 }
-
+ //reavaliar logica dos botoes!!!!!! Eles podem estar causando problema de flickering no codigo.
 void alternarModo() {
   if (modoAtual == SUCULENTA) {
     modoAtual = CACTOS;
@@ -223,7 +232,7 @@ void alternarModo() {
 }
 
 void confirmarModo() {
-  display.fillScreen(ST77XX_BLACK);
+  display.fillScreen(ST77XX_BLACK);//~~
   display.setCursor(40, 25);
   display.print("OK");
   delay(1000);
